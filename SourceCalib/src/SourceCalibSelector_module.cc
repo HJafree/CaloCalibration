@@ -1,7 +1,7 @@
-// SourceCalibSelector: source-calibration selection as a filter (waveform chi2, time grouping,
+// editor: H.Jafree (2026) 
+// Purpose: source-calibration selection as a filter (waveform chi2, time grouping,
 // isolation against the surrounding crystals). For every crystal that passes in a time group it
-// writes one CaloHit (energy = average over the crystal's SiPMs that have a peak, in ADC) pointing to
-// that crystal's CaloRecoDigis (one per waveform peak, amplitude in ADC). It also writes the selected
+// writes one CaloHit pointing to that crystal's CaloRecoDigis. It also writes the selected
 // CaloDigis for EventNtuple. The event passes if at least one crystal was selected.
 #include "art/Framework/Core/EDFilter.h"
 #include "art/Framework/Principal/Event.h"

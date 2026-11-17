@@ -71,7 +71,6 @@ helper.make_plugins( [
     'mu2e_RecoDataProducts',
     'mu2e_Mu2eUtilities',
     'mu2e_BFieldGeom',
-    'mu2e_TrkDiag',
     'KinKal_Trajectory',
     'pthread'
     ] )
