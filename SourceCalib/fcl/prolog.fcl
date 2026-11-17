@@ -5,22 +5,33 @@
 #include "Offline/CaloReco/fcl/prolog.fcl"
 BEGIN_PROLOG
 
-CaloSourceAna :
+// selection (all cuts); put SourceSelect at the end of the trigger path
+CaloSourceSelect :
         {
-            module_type         : SourceCalibDigiAna
+            module_type         : SourceCalibSelector
             caloDigiCollection  : CaloDigiMaker
-            caloShowerSimCollection  : CaloShowerROMaker 
             RawProcessor        : { @table::CaloReco.RawProcessor }
             TemplateProcessor   : { @table::CaloReco.TemplateProcessor }
             processorStrategy   : "TemplateFit"
-            ProtonBunchTimeTag  : "EWMProducer"
             maxChi2Cut          : 2.0
-            diagLevel           : 0
             ratioCut            : 0.8
-            timeCut             : 20
+            timeCut             : 150
+            diagLevel           : 0
+        }
+
+// histograms only, from the crystals SourceSelect selected
+CaloSourceAna :
+        {
+            module_type         : SourceCalibDigiAna
+            caloHitCollection   : SourceSelect
+            caloShowerSimCollection  : CaloShowerROMaker
+            diagLevel           : 0
         }
 
 SourceCalib: {
+    filters: {
+      SourceSelect : @local::CaloSourceSelect
+    }
     analyzers: {
       SourceAna : @local::CaloSourceAna
     }

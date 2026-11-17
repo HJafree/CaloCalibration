@@ -23,15 +23,21 @@ services.SeedService.baseSeed : 99
 services.SeedService.maxUniqueEngines : 20
 source.firstRun: 1201
 physics: {
+    filters: {
+      @table::SourceCalib.filters
+    }
+
     analyzers: {
       @table::SourceCalib.analyzers
     }
 
+   p1: [SourceSelect]
    e1: [SourceAna]
 
     end_paths:     [e1]
-    trigger_paths: []
+    trigger_paths: [p1]
 }
+physics.analyzers.SourceAna.SelectEvents : [p1]
 
 
 

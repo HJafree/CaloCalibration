@@ -48,6 +48,7 @@ physics: {
 
     filters: {
       @table::Digitize.filters
+      @table::SourceCalib.filters
     }
 
     analyzers: {
@@ -56,13 +57,14 @@ physics: {
 
     p1: [ generate, g4run,  EWMProducer,
           @sequence::CaloMC.StepSim,
-          @sequence::CaloMC.DigiSim]
+          @sequence::CaloMC.DigiSim, SourceSelect]
 
     e1: [SourceAna]
 
     trigger_paths: [p1]
     end_paths:     [e1]
 }
+physics.analyzers.SourceAna.SelectEvents : [p1]
 
 physics.producers.CaloHitTruthMatch.primaryParticle : "generate"
 physics.producers.FindMCPrimary.PrimaryProcess : "mu2eCaloCalib"
